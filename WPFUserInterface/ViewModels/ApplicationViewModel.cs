@@ -15,7 +15,7 @@ namespace WPFUserInterface.ViewModels
 
         public ApplicationViewModel(NavigationStore navigationStore)
         {
-            CurrentViewModel = new LoginViewModel();
+            CurrentViewModel = new PDFEditViewModel();
             //_navStore = navigationStore;
         }
     }

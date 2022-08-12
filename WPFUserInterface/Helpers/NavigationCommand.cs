@@ -18,7 +18,7 @@ namespace WPFUserInterface.Helpers
 
         public override void Execute(object parameter)
         {
-            _navigationService.CurrentViewModel = new LoginViewModel();
+            _navigationService.CurrentViewModel = new PDFEditViewModel();
         }
     }
 }

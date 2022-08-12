@@ -41,31 +41,6 @@
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                        Padding="10 0 10 0"/>
 
-
-                <!--<Button Content="Start" Foreground="White" FontSize="11" 
-                    FontWeight="Medium" Grid.Column="10" Grid.ColumnSpan="2">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#FF0266"/>
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF7597"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Width="65" Height="15" CornerRadius="8"
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>-->
-
                 <Button Content="X" Foreground="{StaticResource OnBackgroundColor}" FontSize="11" 
                     FontWeight="Bold" Grid.Column="12" Grid.ColumnSpan="2" Click="Button_Click">
                     <Button.Style>
@@ -93,8 +68,8 @@
         </Grid>
         <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1">
             <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                    <views:LoginView/>
+                <DataTemplate DataType="{x:Type viewmodels:PDFEditViewModel}">
+                    <views:PDFEditView/>
                 </DataTemplate>
                 <!--<DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
                 <views:RegisterView/>

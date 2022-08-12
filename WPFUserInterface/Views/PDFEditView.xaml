@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPFUserInterface.Views.LoginView"
+﻿<UserControl x:Class="WPFUserInterface.Views.PDFEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

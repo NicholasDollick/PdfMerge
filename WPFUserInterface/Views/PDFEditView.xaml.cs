@@ -18,9 +18,9 @@ namespace WPFUserInterface.Views
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class PDFEditView : UserControl
     {
-        public LoginView()
+        public PDFEditView()
         {
             InitializeComponent();
         }

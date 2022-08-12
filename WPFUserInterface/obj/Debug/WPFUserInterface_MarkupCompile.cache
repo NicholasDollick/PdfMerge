@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\App.xaml
-41478394055
+41381106527
 21661565930
-15-647982477
+151999714987
 13-1505183044
-MainWindow.xaml;Views\LoginView.xaml;Views\RegisterView.xaml;Views\SplashView.xaml;
+MainWindow.xaml;Views\PDFEditView.xaml;Views\RegisterView.xaml;Views\SplashView.xaml;
 
 False
 

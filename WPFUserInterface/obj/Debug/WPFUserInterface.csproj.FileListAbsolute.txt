@@ -48,7 +48,6 @@ C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\bin\Debug\WPFUserI
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\bin\Debug\WPFUserInterface.pdb
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.csproj.AssemblyReference.cache
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\MainWindow.g.cs
-C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\LoginView.g.cs
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\RegisterView.g.cs
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\SplashView.g.cs
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\App.g.cs
@@ -58,7 +57,6 @@ C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserI
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface_MarkupCompile.lref
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\App.baml
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\MainWindow.baml
-C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\LoginView.baml
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\RegisterView.baml
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\SplashView.baml
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.g.resources
@@ -67,3 +65,5 @@ C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserI
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.csproj.CoreCompileInputs.cache
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.exe
 C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.pdb
+C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\PDFEditView.g.cs
+C:\Users\nidol\Documents\code stuff\PdfMerge\WPFUserInterface\obj\Debug\Views\PDFEditView.baml

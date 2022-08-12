@@ -7,9 +7,9 @@ using System.Windows.Input;
 
 namespace WPFUserInterface.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class PDFEditViewModel : BaseViewModel
     {
-        public LoginViewModel()
+        public PDFEditViewModel()
         {
 
         }
