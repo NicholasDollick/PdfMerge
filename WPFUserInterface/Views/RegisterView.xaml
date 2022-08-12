@@ -1,0 +1,194 @@
+﻿<UserControl x:Class="WPFUserInterface.Views.RegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFUserInterface.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="900">
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="1" Background="{StaticResource WidgetColorA}"
+                Margin="30 10 30 10" Panel.ZIndex="0" CornerRadius="5">
+            <Border.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" ShadowDepth="2" Softness="30" Opacity="0.9"/>
+            </Border.BitmapEffect>
+
+            <StackPanel Grid.Column="1" Margin="4" Background="{StaticResource WidgetColorA}">
+                <StackPanel>
+                    <Ellipse Width="100" Height="100" Margin="0 5 0 0"
+                             HorizontalAlignment="Center">
+                        <Ellipse.Fill>
+                            <ImageBrush Stretch="UniformToFill"
+                                ImageSource="/Images/bank-building.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <TextBlock Margin="0 0 0 0" Foreground="{StaticResource OnBackgroundColor}" 
+                               HorizontalAlignment="Center" FontWeight="Medium"
+                               Text="{StaticResource ResourceKey=AppName}" FontSize="16"/>
+
+                    <!--<TextBlock Margin="0 20 0 0" Foreground="{StaticResource OnBackgroundColor}" HorizontalAlignment="Center">
+                Need an account? <Hyperlink>Sign Up</Hyperlink>
+                    </TextBlock>-->
+
+                    <Border Height="50" BorderBrush="{StaticResource WidgetColorE}" BorderThickness="2"
+                    CornerRadius="4" Margin="10 10 10 10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Icon-->
+                            <Image Width="20" Height="20" 
+                                   Source="/Images/email.png"/>
+
+                            <TextBox Grid.Column="1" Foreground="{StaticResource OnBackgroundColor}"
+                             Background="{StaticResource WidgetColorA}"
+                               BorderThickness="0" Text="Username" VerticalAlignment="Center"
+                             FontWeight="SemiBold" Height="20"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Height="50" BorderBrush="{StaticResource WidgetColorE}" BorderThickness="2"
+                    CornerRadius="4" Margin="10 10 10 10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Icon-->
+                            <Image Width="20" Height="20" 
+                                   Source="/Images/email.png">
+                                <Image.ToolTip>
+                                    <ToolTip Content=""/>
+                                </Image.ToolTip>
+                            </Image>
+
+                            <TextBox Grid.Column="1" Foreground="{StaticResource OnBackgroundColor}"
+                             Background="{StaticResource WidgetColorA}"
+                               BorderThickness="0" Text="Email" VerticalAlignment="Center"
+                             FontWeight="SemiBold" Height="20"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Height="50" BorderBrush="{StaticResource WidgetColorE}" BorderThickness="2"
+                    CornerRadius="4" Margin="10 10 10 10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Icon-->
+                            <Image Width="20" Height="20" 
+                                   Source="/Images/forgot-password.png"/>
+
+                            <PasswordBox Grid.Column="1" Foreground="{StaticResource OnBackgroundColor}"
+                             Background="{StaticResource WidgetColorA}"
+                               BorderThickness="0" Password="Password" VerticalAlignment="Center"
+                             FontWeight="SemiBold" Height="20"/>
+                        </Grid>
+                    </Border>
+
+
+                    <Border Height="50" BorderBrush="{StaticResource WidgetColorE}" BorderThickness="2"
+                    CornerRadius="4" Margin="10 10 10 10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Icon-->
+                            <Image Width="20" Height="20" 
+                                   Source="/Images/forgot-password.png"/>
+
+                            <PasswordBox Grid.Column="1" Foreground="{StaticResource OnBackgroundColor}"
+                             Background="{StaticResource WidgetColorA}"
+                               BorderThickness="0" Password="Password" VerticalAlignment="Center"
+                             FontWeight="SemiBold" Height="20"/>
+                        </Grid>
+                    </Border>
+
+                    <Button Content="Register" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
+                    Margin="0 20 0 0">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
+                                <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="30" CornerRadius="2"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <TextBlock Foreground="{StaticResource OnBackgroundColor}" 
+                   VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                   Margin="0 30 0 20">
+                    <Hyperlink Foreground="{StaticResource OnBackgroundColor}">
+                       Forgot Password?
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="0" Grid.RowSpan="2" Margin="160 -365 -610 85"
+              Panel.ZIndex="-1">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="30"/>
+            </Grid.RenderTransform>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="-550 400 -255 -250">
+                    <Border Width="700" Height="35" Background="{StaticResource SecondaryColor}" 
+                            Margin="150 0 0 0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="{StaticResource PrimaryColor}" 
+                            Margin="0 15 0 0" CornerRadius="20"/>
+
+                    <Border Width="700" Height="35" Background="{StaticResource PrimaryVariantColor}" 
+                            Margin="75 15 0 0" CornerRadius="20"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="2" Margin="180,-115,-510,-32"
+              Panel.ZIndex="-1">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="30"/>
+            </Grid.RenderTransform>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="120 400 255 -250">
+                    <Border Width="700" Height="35" Background="{StaticResource SecondaryColor}" 
+                            Margin="150 0 0 0" CornerRadius="20"/>
+
+                    <Border Width="700" Height="35" Background="{StaticResource PrimaryColor}" 
+                            Margin="0 15 0 0" CornerRadius="20"/>
+
+                    <Border Width="700" Height="35" Background="{StaticResource PrimaryVariantColor}" 
+                            Margin="75 15 0 0" CornerRadius="20"/>
+
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+﻿<Application x:Class="WPFUserInterface.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPFUserInterface"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--dark mode(default)-->
+            <SolidColorBrush x:Key="BackgroundColor" Color="#121212"/>
+            <SolidColorBrush x:Key="PrimaryColor" Color="#BB86FC"/>
+            <SolidColorBrush x:Key="PrimaryVariantColor" Color="#3700B3"/>
+            <SolidColorBrush x:Key="SecondaryColor" Color="#03DAC6"/>
+            <SolidColorBrush x:Key="SecondaryVariantColor" Color="#03DAC6"/>
+            <SolidColorBrush x:Key="SurfaceColor" Color="#121212"/>
+            <SolidColorBrush x:Key="Border" Color="Black"/>
+            <SolidColorBrush x:Key="Error" Color="#CF6679"/>
+            <SolidColorBrush x:Key="AccentColor" Color="#FF0266"/>
+            <SolidColorBrush x:Key="AccentVariantColor" Color="#FFBF4D7A"/>
+            <SolidColorBrush x:Key="OnPrimaryColor" Color="Black"/>
+            <SolidColorBrush x:Key="OnAccentColor" Color="Black"/>
+            <SolidColorBrush x:Key="OnSecondaryColor" Color="Black"/>
+            <SolidColorBrush x:Key="OnBackgroundColor" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="OnErrorColor" Color="Black"/>
+
+            <SolidColorBrush x:Key="WidgetColorA" Color="#1d1d1d"/>
+            <SolidColorBrush x:Key="WidgetColorB" Color="#212121"/>
+            <SolidColorBrush x:Key="WidgetColorC" Color="#242424"/>
+            <SolidColorBrush x:Key="WidgetColorD" Color="#272727"/>
+            <SolidColorBrush x:Key="WidgetColorE" Color="#2c2c2c"/>
+
+            <sys:String x:Key="AppName">MVVM App</sys:String>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
