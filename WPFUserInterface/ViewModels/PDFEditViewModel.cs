@@ -2,7 +2,7 @@
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WPFUserInterface.Helpers;
 
@@ -13,10 +13,15 @@ namespace WPFUserInterface.ViewModels
         public ICommand OpenFileButtonClick { get; set; }
         public ICommand OnFileDropCommand { get; set; }
 
+        // this might need to be a custom list....
+        public ObservableCollection<PdfDocument> Pdfs { get; set; }
+
         public PDFEditViewModel()
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             OnFileDropCommand = new RelayCommand(Test, param => true);
+
+            Pdfs = new ObservableCollection<PdfDocument>();
         }
 
         private void Test(object obj)
@@ -38,22 +43,23 @@ namespace WPFUserInterface.ViewModels
 
             if (res == true)
             {
-                List<PdfDocument> pdfs = new List<PdfDocument>();
+                Pdfs.Clear();
                 foreach (string filename in ofd.FileNames)
                 {
-                    using (var file = PdfReader.Open(filename, PdfDocumentOpenMode.Import)) {
-                        pdfs.Add(file);
+                    using (PdfDocument file = PdfReader.Open(filename, PdfDocumentOpenMode.Import)) {
+                        Pdfs.Add(file);
                     }
                 }
 
                 // assemble the pages of the pdfs into one file
                 using (PdfDocument saveToDoc = new PdfDocument())
                 {
-                    foreach(PdfDocument doc in pdfs)
+                    foreach(PdfDocument doc in Pdfs)
                     {
                         TransferPages(doc, saveToDoc);
                     }
 
+                    // this should take a name field somewhere?
                     saveToDoc.Save("combinedPdfs.pdf");
                 }
             }

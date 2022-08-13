@@ -81,6 +81,7 @@
     <Compile Include="Helpers\NavigationCommand.cs" />
     <Compile Include="Helpers\NavigationStore.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Models\FilePreview.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\PDFEditViewModel.cs" />
@@ -158,9 +159,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\3223254.svg" />
     <Resource Include="Images\forgot-password.png" />
