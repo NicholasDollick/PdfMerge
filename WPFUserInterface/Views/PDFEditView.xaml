@@ -26,7 +26,7 @@
                              HorizontalAlignment="Center">
                         <Ellipse.Fill>
                             <ImageBrush Stretch="UniformToFill"
-                                ImageSource="/Images/bank-building.png"/>
+                                ImageSource="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"/>
                         </Ellipse.Fill>
                     </Ellipse>
 
@@ -95,8 +95,21 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
-                        
+                        <ListView Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
+                                  ItemsSource="{Binding Pdfs, UpdateSourceTrigger=Default}"
+                                  Height="300" Background="{StaticResource WidgetColorC}"
+                                  BorderThickness="0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <!--format how the things look here-->
+                                    <StackPanel Orientation="Vertical">
+                                        <Image Source="{Binding PreviewIcon}" Width="30" Height="30"/>
+                                        <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="White"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+ 
                     </Grid>
                 </StackPanel>
                 

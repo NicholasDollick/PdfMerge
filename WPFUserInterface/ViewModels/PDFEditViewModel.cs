@@ -3,8 +3,10 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 using WPFUserInterface.Helpers;
+using WPFUserInterface.Models;
 
 namespace WPFUserInterface.ViewModels
 {
@@ -13,15 +15,14 @@ namespace WPFUserInterface.ViewModels
         public ICommand OpenFileButtonClick { get; set; }
         public ICommand OnFileDropCommand { get; set; }
 
-        // this might need to be a custom list....
-        public ObservableCollection<PdfDocument> Pdfs { get; set; }
+        public ObservableCollection<PdfDocumentModel> _pdfs;
 
         public PDFEditViewModel()
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             OnFileDropCommand = new RelayCommand(Test, param => true);
 
-            Pdfs = new ObservableCollection<PdfDocument>();
+            Pdfs = new ObservableCollection<PdfDocumentModel>();
         }
 
         private void Test(object obj)
@@ -46,22 +47,31 @@ namespace WPFUserInterface.ViewModels
                 Pdfs.Clear();
                 foreach (string filename in ofd.FileNames)
                 {
-                    using (PdfDocument file = PdfReader.Open(filename, PdfDocumentOpenMode.Import)) {
-                        Pdfs.Add(file);
+                    // its possible for this section to...crash?
+                    try{
+                        using (PdfDocument file = PdfReader.Open(filename, PdfDocumentOpenMode.Import))
+                        {
+                            Pdfs.Add(new PdfDocumentModel(file));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        // this should much better error handling
+                        System.Windows.MessageBox.Show(e.Message);
                     }
                 }
 
                 // assemble the pages of the pdfs into one file
-                using (PdfDocument saveToDoc = new PdfDocument())
-                {
-                    foreach(PdfDocument doc in Pdfs)
-                    {
-                        TransferPages(doc, saveToDoc);
-                    }
+                //using (PdfDocument saveToDoc = new PdfDocument())
+                //{
+                //    foreach(PdfDocumentModel doc in Pdfs)
+                //    {
+                //        TransferPages(doc.PdfDocument, saveToDoc);
+                //    }
 
-                    // this should take a name field somewhere?
-                    saveToDoc.Save("combinedPdfs.pdf");
-                }
+                //    // this should take a name field somewhere?
+                //    saveToDoc.Save("combinedPdfs.pdf");
+                //}
             }
         }
 
@@ -71,6 +81,23 @@ namespace WPFUserInterface.ViewModels
             foreach(PdfPage page in from.Pages)
             {
                 to.AddPage(page);
+            }
+        }
+
+
+        public ObservableCollection<PdfDocumentModel> Pdfs
+        {
+            get => this._pdfs;
+            set
+            {
+                SetField(ref this._pdfs, value, "Pdfs");
+                if (value == null)
+                    return;
+
+                this._pdfs.CollectionChanged += ((object sender, NotifyCollectionChangedEventArgs args) =>
+                {
+                    OnPropertyChanged("Pdfs");
+                });
             }
         }
     }

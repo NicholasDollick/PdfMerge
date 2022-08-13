@@ -35,7 +35,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="0" Source="Images/bank-building.png" Margin="2"/>
+                <Image Grid.Column="0" 
+                       Source="https://cdn-icons-png.flaticon.com/512/8215/8215352.png" 
+                       Margin="0"/>
 
                 <TextBlock Text="{StaticResource AppName}" Foreground="{StaticResource OnBackgroundColor}" Grid.Column="1"
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
