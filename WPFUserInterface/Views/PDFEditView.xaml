@@ -36,10 +36,12 @@
 
 
                     <!-- This is where the drag and drop stuff should go -->
-                    
+                    <Grid>
+                        
+                    </Grid>
 
 
-                    <Button Content="Start" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
+                    <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
                     Margin="0 20 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
