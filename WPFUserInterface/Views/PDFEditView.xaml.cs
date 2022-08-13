@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WPFUserInterface.Views
 {
@@ -15,6 +16,9 @@ namespace WPFUserInterface.Views
             InitializeComponent();
         }
 
+        public static readonly DependencyProperty FileDropCommandProperty = 
+                    DependencyProperty.Register("FileDropCommandProperty", typeof(ICommand), typeof(PDFEditView), new PropertyMetadata(null));
+
         // TODO: this isnt MVVM and should be pulled out into a command
         private void StackPanel_Drop(object sender, DragEventArgs e)
         {
@@ -26,21 +30,6 @@ namespace WPFUserInterface.Views
                 {
                     MessageBox.Show(Path.GetFileName(file));
                 }
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-
-            bool? res = openFile.ShowDialog();
-
-            // TODO: this should filter to only allow for PDFS
-            if(res == true)
-            {
-                string path = openFile.FileName;
-
-                MessageBox.Show(path);
             }
         }
     }

@@ -90,3 +90,10 @@ F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.Properties.Reso
 F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.csproj.GenerateResource.cache
 F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.exe
 F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.pdb
+F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\PdfSharp.Charting.dll
+F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\PdfSharp.dll
+F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\PdfSharp.xml
+F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\PdfSharp.Charting.xml
+F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\de\PdfSharp.resources.dll
+F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\de\PdfSharp.Charting.resources.dll
+F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.csproj.CopyComplete

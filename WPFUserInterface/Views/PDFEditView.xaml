@@ -40,16 +40,17 @@
 
 
                     <!-- This is where the drag and drop stuff should go -->
-
+                    <!--in theory, this entire section can be bool flag controlled and switch to 
+                    display the editing user controls after files are added-->
                     <StackPanel Orientation="Vertical" Background="{StaticResource WidgetColorE}"
-                                Margin="0 20 0 0" Drop="StackPanel_Drop" AllowDrop="True">
+                                Margin="0 20 0 0" AllowDrop="True" Drop="StackPanel_Drop">
                         <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
                                    StrokeDashArray="4 4" SnapsToDevicePixels="True"
                                    Margin="0 5 0 0">
 
                         </Rectangle>
                         <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
-                    Margin="0 20 0 0" Click="Button_Click">
+                    Margin="0 20 0 0" Command="{Binding OpenFileButtonClick}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
@@ -84,6 +85,21 @@
                         </Rectangle>
                     </StackPanel>
                 </StackPanel>
+
+                <!--where the file preview and stuff will go-->
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        
+                    </Grid>
+                </StackPanel>
+                
             </StackPanel>
         </Border>
 
