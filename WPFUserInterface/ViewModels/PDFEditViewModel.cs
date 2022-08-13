@@ -61,17 +61,22 @@ namespace WPFUserInterface.ViewModels
                     }
                 }
 
-                // assemble the pages of the pdfs into one file
-                //using (PdfDocument saveToDoc = new PdfDocument())
-                //{
-                //    foreach(PdfDocumentModel doc in Pdfs)
-                //    {
-                //        TransferPages(doc.PdfDocument, saveToDoc);
-                //    }
 
-                //    // this should take a name field somewhere?
-                //    saveToDoc.Save("combinedPdfs.pdf");
-                //}
+            }
+        }
+
+        void SaveNewPdf(string fileName)
+        {
+            // assemble the pages of the pdfs into one file
+            using (PdfDocument saveToDoc = new PdfDocument())
+            {
+                foreach (PdfDocumentModel doc in Pdfs)
+                {
+                    TransferPages(doc.PdfDocument, saveToDoc);
+                }
+
+                // this should take a name field somewhere?
+                saveToDoc.Save($"{fileName}.pdf");
             }
         }
 

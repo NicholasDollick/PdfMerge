@@ -39,7 +39,6 @@
                                Text="A cute tagline should go here" FontSize="13"/>
 
 
-                    <!-- This is where the drag and drop stuff should go -->
                     <!--in theory, this entire section can be bool flag controlled and switch to 
                     display the editing user controls after files are added-->
                     <StackPanel Orientation="Vertical" Background="{StaticResource WidgetColorE}"
@@ -95,20 +94,39 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <ListView Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
+
+                        <ListBox ItemsSource="{Binding Pdfs}" Height="160"
+                                 BorderThickness="0" Background="{StaticResource WidgetColorC}"
+                                 AllowDrop="True"
+                                 PreviewMouseDown="ListBox_PreviewMouseDown"
+                                 Drop="ListBox_Drop"
+                                 GiveFeedback="ListBox_GiveFeedback">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <Image Source="{Binding PreviewIcon}" Width="30" Height="30"/>
+                                        <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="White"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        
+                        
+                        <!--<ListView Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
                                   ItemsSource="{Binding Pdfs, UpdateSourceTrigger=Default}"
                                   Height="300" Background="{StaticResource WidgetColorC}"
                                   BorderThickness="0">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <!--format how the things look here-->
+                                    --><!--format how the things look here--><!--
+           
                                     <StackPanel Orientation="Vertical">
                                         <Image Source="{Binding PreviewIcon}" Width="30" Height="30"/>
                                         <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="White"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                        </ListView>
+                        </ListView>-->
  
                     </Grid>
                 </StackPanel>
