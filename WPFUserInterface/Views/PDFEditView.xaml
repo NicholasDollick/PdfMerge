@@ -34,37 +34,55 @@
                                HorizontalAlignment="Center" FontWeight="Medium"
                                Text="{StaticResource ResourceKey=AppName}" FontSize="16"/>
 
+                    <TextBlock Margin="0 0 0 0" Foreground="{StaticResource OnBackgroundColor}" 
+                               HorizontalAlignment="Center" FontWeight="Light"
+                               Text="A cute tagline should go here" FontSize="13"/>
+
 
                     <!-- This is where the drag and drop stuff should go -->
-                    <Grid>
-                        
-                    </Grid>
 
+                    <StackPanel Orientation="Vertical" Background="{StaticResource WidgetColorE}"
+                                Margin="0 20 0 0" Drop="StackPanel_Drop" AllowDrop="True">
+                        <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
+                                   StrokeDashArray="4 4" SnapsToDevicePixels="True"
+                                   Margin="0 5 0 0">
 
-                    <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
-                    Margin="0 20 0 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
-                                <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+                        </Rectangle>
+                        <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
+                    Margin="0 20 0 0" Click="Button_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
+                                    <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
 
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="150" Height="30" CornerRadius="2"
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="150" Height="30" CornerRadius="2"
                                     Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <TextBlock Margin="0 0 0 10" Foreground="{StaticResource OnBackgroundColor}" 
+                               HorizontalAlignment="Center" FontWeight="Light"
+                               Text="or drop PDFs here" FontSize="13"/>
+
+
+                        <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
+                                   StrokeDashArray="4 4" SnapsToDevicePixels="True"
+                                   Margin="0 0 0 5">
+                        </Rectangle>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Border>
@@ -87,7 +105,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="2" Margin="180,-115,-510,-32"
+        <Grid Grid.Column="2" Margin="110,-135,-510,-42"
               Panel.ZIndex="-1">
             <Grid.RenderTransform>
                 <RotateTransform Angle="30"/>
