@@ -89,6 +89,9 @@
     <Compile Include="Views\PDFEditView.xaml.cs">
       <DependentUpon>PDFEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PdfIconCard.xaml.cs">
+      <DependentUpon>PdfIconCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\PDFEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PdfIconCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

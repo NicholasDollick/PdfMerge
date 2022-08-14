@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WPFUserInterface.Models;
+using WPFUserInterface.ViewModels;
 
 namespace WPFUserInterface.Views
 {
@@ -14,6 +15,7 @@ namespace WPFUserInterface.Views
     /// </summary>
     public partial class PDFEditView : UserControl
     {
+
         public PDFEditView()
         {
             InitializeComponent();
@@ -36,44 +38,31 @@ namespace WPFUserInterface.Views
             }
         }
 
-        private void ListBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is ListBoxItem)
-            {
-                var draggedItem = sender as ListBoxItem;
-                //var data = draggedItem.DataContext as PdfDocumentModel;
-
-                draggedItem.IsSelected = true;
-                //CreateDragDropWindow(card);
-                DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
-            }
-        }
-
         private void ListBox_Drop(object sender, DragEventArgs e)
         {
+            StackPanel droppedData = e.Data.GetData(typeof(StackPanel)) as StackPanel;
 
+            // this correctly id's the item being dragged
+            var target = (sender as StackPanel).DataContext;
+            int targetIndex = PdfListBox.Items.IndexOf(target);
+
+            ((PDFEditViewModel)this.DataContext).UpdatePDFListOrder((droppedData.DataContext) as PdfDocumentModel, targetIndex);
         }
 
-        private void ListBox_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        private void StackPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            // update the position of the visual feedback item
-            Win32Point w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-
-            //this._dragdropWindow.Left = w32Mouse.X;
-            //this._dragdropWindow = w32Mouse.Y;
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                // this wrapping is a little hacky 
+                try
+                {
+                    DragDrop.DoDragDrop(sender as StackPanel, sender as StackPanel, DragDropEffects.Move);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message} || {ex.StackTrace}");
+                }
+            }
         }
-
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
-
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point
-        {
-            public Int32 X;
-            public Int32 Y;
-        };
     }
 }

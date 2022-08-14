@@ -97,3 +97,5 @@ F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\PdfSharp.Charting.xml
 F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\de\PdfSharp.resources.dll
 F:\Personal\PdfMerge\WPFUserInterface\bin\Debug\de\PdfSharp.Charting.resources.dll
 F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\WPFUserInterface.csproj.CopyComplete
+F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\Views\PdfIconCard.g.cs
+F:\Personal\PdfMerge\WPFUserInterface\obj\Debug\Views\PdfIconCard.baml

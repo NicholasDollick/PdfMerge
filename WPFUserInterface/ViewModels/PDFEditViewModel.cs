@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
+using WPFUserInterface.Views;
 
 namespace WPFUserInterface.ViewModels
 {
@@ -16,6 +17,8 @@ namespace WPFUserInterface.ViewModels
         public ICommand OnFileDropCommand { get; set; }
 
         public ObservableCollection<PdfDocumentModel> _pdfs;
+        
+        public ObservableCollection<PdfIconCard> TestList { get; set; }
 
         public PDFEditViewModel()
         {
@@ -63,6 +66,14 @@ namespace WPFUserInterface.ViewModels
 
 
             }
+        }
+
+        internal void UpdatePDFListOrder(PdfDocumentModel droppedData, int targetIndex)
+        {
+            Pdfs.Remove(droppedData);
+            Pdfs.Insert(targetIndex, droppedData);
+            //PdfListBox.Items.Remove(droppedData);
+            //PdfListBox.Items.Insert(targetIndex, droppedData);
         }
 
         void SaveNewPdf(string fileName)

@@ -86,6 +86,8 @@
                 </StackPanel>
 
                 <!--where the file preview and stuff will go-->
+
+                
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -94,16 +96,19 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <ListBox ItemsSource="{Binding Pdfs}" Height="160"
+                        <!--PreviewMouseDown="ListBox_PreviewMouseDown"
+                                 Drop="ListBox_Drop"
+                                 GiveFeedback="ListBox_GiveFeedback"-->
+                        <ListBox ItemsSource="{Binding Pdfs}" 
                                  BorderThickness="0" Background="{StaticResource WidgetColorC}"
                                  AllowDrop="True"
-                                 PreviewMouseDown="ListBox_PreviewMouseDown"
-                                 Drop="ListBox_Drop"
-                                 GiveFeedback="ListBox_GiveFeedback">
+                                 Height="160" Width="400"
+                                  x:Name="PdfListBox"
+                                 HorizontalAlignment="Center">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" MouseMove="StackPanel_MouseMove" 
+                                                Drop="ListBox_Drop">
                                         <Image Source="{Binding PreviewIcon}" Width="30" Height="30"/>
                                         <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="White"/>
                                     </StackPanel>
