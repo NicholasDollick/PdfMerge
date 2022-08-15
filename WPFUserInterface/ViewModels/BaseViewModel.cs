@@ -7,7 +7,7 @@ namespace WPFUserInterface.ViewModels
     public class BaseViewModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public string SettingsJsonLocation { get; set; }
         protected void OnPropertyChanged(string propertyName = null)
         {
             PropertyChangedEventHandler handler = this.PropertyChanged;

@@ -34,12 +34,13 @@
                         <StackPanel Margin="10 0 0 0"
                             Orientation="Vertical" VerticalAlignment="Center">
                             <TextBlock Margin="0 5 0 0" Foreground="{StaticResource OnBackgroundColor}" 
-                               HorizontalAlignment="Center" FontWeight="Medium"
-                               Text="{StaticResource ResourceKey=AppName}" FontSize="22"/>
+                               HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Bottom"
+                               Text="{StaticResource ResourceKey=AppName}"
+                                       FontSize="33"/>
 
                             <TextBlock Margin="0 0 0 0" Foreground="{StaticResource OnBackgroundColor}" 
                                HorizontalAlignment="Center" FontWeight="Light"
-                               Text="A cute tagline should go here" FontSize="12"/>
+                               Text="open source PDF assembler" FontSize="11"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -51,49 +52,50 @@
                                 Margin="0 20 0 0" AllowDrop="True" Drop="StackPanel_Drop">
                         <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
                                    StrokeDashArray="4 4" SnapsToDevicePixels="True"
-                                   Margin="0 5 0 0">
+                                   Margin="0 5 0 0"/>
 
-                        </Rectangle>
-                        <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
+
+
+                        <!--this panel has the button and text-->
+                        <StackPanel Orientation="Vertical">
+                            <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
                     Margin="0 20 0 0" Command="{Binding OpenFileButtonClick}">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
-                                    <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
+                                        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
 
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="150" Height="30" CornerRadius="2"
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="150" Height="30" CornerRadius="2"
                                     Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
 
-                        <TextBlock Margin="0 0 0 10" Foreground="{StaticResource OnBackgroundColor}" 
+                            <TextBlock Margin="0 0 0 10" Foreground="{StaticResource OnBackgroundColor}" 
                                HorizontalAlignment="Center" FontWeight="Light"
                                Text="or drop PDFs here" FontSize="13"/>
+                        </StackPanel>
 
 
                         <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
                                    StrokeDashArray="4 4" SnapsToDevicePixels="True"
-                                   Margin="0 0 0 5">
-                        </Rectangle>
+                                   Margin="0 0 0 5"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!--where the file preview and stuff will go-->
-
-                
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -109,6 +111,7 @@
                                  BorderThickness="0" Background="{StaticResource WidgetColorC}"
                                  AllowDrop="True"
                                  Height="160" Width="400"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                   x:Name="PdfListBox"
                                  HorizontalAlignment="Center">
                             <ListBox.ItemTemplate>
@@ -123,17 +126,69 @@
                             <!--this can also be set with a style-->
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <!--<StackPanel Orientation="Horizontal"/>-->
+                                    <WrapPanel Orientation="Horizontal"/>
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
- 
                     </Grid>
                 </StackPanel>
 
-                <Button Command="{Binding MergeAndSave}">
-                    <TextBlock Text="Merge"/>
-                </Button>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <Button Content="Merge" Foreground="{StaticResource OnSecondaryColor}" 
+                            FontSize="14" FontWeight="Medium" VerticalAlignment="Center"
+                    Margin="0 0 0 0" Command="{Binding MergeAndSaveCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
+                                <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="70" Height="30" CornerRadius="2"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button Content="Reset" Foreground="{StaticResource OnSecondaryColor}" 
+                            FontSize="14" FontWeight="Medium" VerticalAlignment="Center"
+                    Margin="10 0 0 0" Command="{Binding ClearListCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!--<Setter Property="TextElement.FontFamily" Value=""/>-->
+                                <!--<Setter Property="Background" Value="{StaticResource AccentColor}"/>-->
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource PrimaryVariantColor}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="70" Height="30" CornerRadius="2"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                
             </StackPanel>
         </Border>
 
@@ -146,6 +201,7 @@
                 <StackPanel Margin="-550 400 -255 -250">
                     <Border Width="700" Height="35" Background="{StaticResource SecondaryColor}" 
                             Margin="150 0 0 0" CornerRadius="20"/>
+                    
                     <Border Width="700" Height="35" Background="{StaticResource PrimaryColor}" 
                             Margin="0 15 0 0" CornerRadius="20"/>
 

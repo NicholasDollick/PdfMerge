@@ -13,8 +13,8 @@ namespace WPFUserInterface.ViewModels
     public class PDFEditViewModel : BaseViewModel
     {
         public ICommand OpenFileButtonClick { get; set; }
-        public ICommand OnFileDropCommand { get; set; }
-        public ICommand MergeAndSave { get; set; }
+        public ICommand MergeAndSaveCommand { get; set; }
+        public ICommand ClearListCommand { get; set; }
 
         public ObservableCollection<PdfDocumentModel> _pdfs;
         
@@ -23,15 +23,15 @@ namespace WPFUserInterface.ViewModels
         public PDFEditViewModel()
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
-            OnFileDropCommand = new RelayCommand(Test, param => true);
-            MergeAndSave = new RelayCommand(MergePDFs, param => true);
+            MergeAndSaveCommand = new RelayCommand(MergePDFs, param => true);
+            ClearListCommand = new RelayCommand(ClearList, param => true);
 
             Pdfs = new ObservableCollection<PdfDocumentModel>();
         }
 
-        private void Test(object obj)
+        private void ClearList(object obj)
         {
-            throw new NotImplementedException();
+            Pdfs.Clear();
         }
 
         private void MergePDFs(object obj)
@@ -67,7 +67,6 @@ namespace WPFUserInterface.ViewModels
 
             if (res == true)
             {
-                Pdfs.Clear();
                 AddPdfsToCollection(ofd.FileNames);
             }
         }

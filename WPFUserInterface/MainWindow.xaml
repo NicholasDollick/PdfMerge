@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:WPFUserInterface.Views"
         xmlns:viewmodels="clr-namespace:WPFUserInterface.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="900"
+        Title="MainWindow" Height="520" Width="900"
         WindowStyle="None"
         ResizeMode="NoResize">
 
@@ -39,8 +39,9 @@
                        Source="https://cdn-icons-png.flaticon.com/512/8215/8215352.png" 
                        Margin="0"/>
 
-                <TextBlock Text="{StaticResource AppName}" Foreground="{StaticResource OnBackgroundColor}" Grid.Column="1"
-                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                <TextBlock Text="{Binding Source={StaticResource AppName}, StringFormat={}{0} Basic}"  
+                           Foreground="{StaticResource OnBackgroundColor}" Grid.Column="1"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.ColumnSpan="2"
                        Padding="10 0 10 0"/>
 
 
