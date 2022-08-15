@@ -22,21 +22,27 @@
 
             <StackPanel Grid.Column="1" Margin="4" Background="{StaticResource WidgetColorA}">
                 <StackPanel>
-                    <Ellipse Width="100" Height="100" Margin="0 10 0 0"
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Ellipse Width="100" Height="100" Margin="0 10 0 0"
                              HorizontalAlignment="Center">
-                        <Ellipse.Fill>
-                            <ImageBrush Stretch="UniformToFill"
+                            <Ellipse.Fill>
+                                <ImageBrush Stretch="UniformToFill"
                                 ImageSource="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-
-                    <TextBlock Margin="0 5 0 0" Foreground="{StaticResource OnBackgroundColor}" 
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <StackPanel Margin="10 0 0 0"
+                            Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Margin="0 5 0 0" Foreground="{StaticResource OnBackgroundColor}" 
                                HorizontalAlignment="Center" FontWeight="Medium"
-                               Text="{StaticResource ResourceKey=AppName}" FontSize="16"/>
+                               Text="{StaticResource ResourceKey=AppName}" FontSize="22"/>
 
-                    <TextBlock Margin="0 0 0 0" Foreground="{StaticResource OnBackgroundColor}" 
+                            <TextBlock Margin="0 0 0 0" Foreground="{StaticResource OnBackgroundColor}" 
                                HorizontalAlignment="Center" FontWeight="Light"
-                               Text="A cute tagline should go here" FontSize="13"/>
+                               Text="A cute tagline should go here" FontSize="12"/>
+                        </StackPanel>
+
+                    </StackPanel>
 
 
                     <!--in theory, this entire section can be bool flag controlled and switch to 
@@ -114,28 +120,20 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
+                            <!--this can also be set with a style-->
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
                         </ListBox>
-                        
-                        
-                        <!--<ListView Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
-                                  ItemsSource="{Binding Pdfs, UpdateSourceTrigger=Default}"
-                                  Height="300" Background="{StaticResource WidgetColorC}"
-                                  BorderThickness="0">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    --><!--format how the things look here--><!--
-           
-                                    <StackPanel Orientation="Vertical">
-                                        <Image Source="{Binding PreviewIcon}" Width="30" Height="30"/>
-                                        <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="White"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>-->
  
                     </Grid>
                 </StackPanel>
-                
+
+                <Button Command="{Binding MergeAndSave}">
+                    <TextBlock Text="Merge"/>
+                </Button>
             </StackPanel>
         </Border>
 

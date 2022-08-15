@@ -7,7 +7,6 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
-using WPFUserInterface.Views;
 
 namespace WPFUserInterface.ViewModels
 {
@@ -15,15 +14,17 @@ namespace WPFUserInterface.ViewModels
     {
         public ICommand OpenFileButtonClick { get; set; }
         public ICommand OnFileDropCommand { get; set; }
+        public ICommand MergeAndSave { get; set; }
 
         public ObservableCollection<PdfDocumentModel> _pdfs;
         
-        public ObservableCollection<PdfIconCard> TestList { get; set; }
+        public string MergedFileName { get; set; } = "Temp default value";
 
         public PDFEditViewModel()
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             OnFileDropCommand = new RelayCommand(Test, param => true);
+            MergeAndSave = new RelayCommand(MergePDFs, param => true);
 
             Pdfs = new ObservableCollection<PdfDocumentModel>();
         }
@@ -33,7 +34,26 @@ namespace WPFUserInterface.ViewModels
             throw new NotImplementedException();
         }
 
-        void ImportPDFs(object param)
+        private void MergePDFs(object obj)
+        {
+            if (Pdfs.Count == 0)
+                return;
+
+            // assemble the pages of the pdfs into one file
+            using (PdfDocument saveToDoc = new PdfDocument())
+            {
+                foreach (PdfDocumentModel doc in Pdfs)
+                {
+                    TransferPages(doc.PdfDocument, saveToDoc);
+                }
+
+                // this should take a name field somewhere?
+                saveToDoc.Save($"{MergedFileName}.pdf");
+                //Process.Start(saveToDoc.FullPath);
+            }
+        }
+
+        private void ImportPDFs(object param)
         {
             OpenFileDialog ofd = new OpenFileDialog {
                 InitialDirectory = "",
@@ -48,23 +68,27 @@ namespace WPFUserInterface.ViewModels
             if (res == true)
             {
                 Pdfs.Clear();
-                foreach (string filename in ofd.FileNames)
+                AddPdfsToCollection(ofd.FileNames);
+            }
+        }
+
+        internal void AddPdfsToCollection(string[] files)
+        {
+            foreach (string filename in files)
+            {
+                // its possible for this section to...crash?
+                try
                 {
-                    // its possible for this section to...crash?
-                    try{
-                        using (PdfDocument file = PdfReader.Open(filename, PdfDocumentOpenMode.Import))
-                        {
-                            Pdfs.Add(new PdfDocumentModel(file));
-                        }
-                    }
-                    catch (Exception e)
+                    using (PdfDocument file = PdfReader.Open(filename, PdfDocumentOpenMode.Import))
                     {
-                        // this should much better error handling
-                        System.Windows.MessageBox.Show(e.Message);
+                        Pdfs.Add(new PdfDocumentModel(file));
                     }
                 }
-
-
+                catch (Exception e)
+                {
+                    // this should much better error handling
+                    System.Windows.MessageBox.Show(e.Message);
+                }
             }
         }
 
@@ -72,23 +96,6 @@ namespace WPFUserInterface.ViewModels
         {
             Pdfs.Remove(droppedData);
             Pdfs.Insert(targetIndex, droppedData);
-            //PdfListBox.Items.Remove(droppedData);
-            //PdfListBox.Items.Insert(targetIndex, droppedData);
-        }
-
-        void SaveNewPdf(string fileName)
-        {
-            // assemble the pages of the pdfs into one file
-            using (PdfDocument saveToDoc = new PdfDocument())
-            {
-                foreach (PdfDocumentModel doc in Pdfs)
-                {
-                    TransferPages(doc.PdfDocument, saveToDoc);
-                }
-
-                // this should take a name field somewhere?
-                saveToDoc.Save($"{fileName}.pdf");
-            }
         }
 
         // these are bad var names
