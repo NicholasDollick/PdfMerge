@@ -86,7 +86,8 @@ namespace WPFUserInterface.ViewModels
                 catch (Exception e)
                 {
                     // this should much better error handling
-                    System.Windows.MessageBox.Show(e.Message);
+                    //System.Windows.MessageBox.Show(e.Message);
+                    Console.WriteLine(e.Message);
                 }
             }
         }

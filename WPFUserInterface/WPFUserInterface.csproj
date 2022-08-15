@@ -155,6 +155,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Images\3223254.svg" />
+    <Resource Include="Images\WPFUserInterface_ovzz1uV4Tm.png" />
     <Resource Include="Images\forgot-password.png" />
     <Resource Include="Images\fintech.png" />
     <Resource Include="Images\bank-building.png" />

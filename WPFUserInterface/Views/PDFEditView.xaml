@@ -117,9 +117,11 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical" MouseMove="StackPanel_MouseMove" 
-                                                Drop="ListBox_Drop">
-                                        <Image Source="{Binding PreviewIcon}" Width="30" Height="30"/>
-                                        <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="White"/>
+                                                Drop="ListBox_Drop" Height="80" Width="80">
+                                        <Image Source="{Binding PreviewIcon}" Width="50" Height="50"/>
+                                        <TextBlock Text="{Binding FileName}" FontSize="10"
+                                                   Foreground="White" Width="40"
+                                                   TextWrapping="Wrap"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

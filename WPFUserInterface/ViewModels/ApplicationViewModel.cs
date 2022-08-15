@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WPFUserInterface.Helpers;
+﻿using WPFUserInterface.Helpers;
 
 namespace WPFUserInterface.ViewModels
 {
@@ -12,6 +7,10 @@ namespace WPFUserInterface.ViewModels
         private readonly NavigationStore _navStore;
 
         public BaseViewModel CurrentViewModel {get;}
+
+        // settings for the app should live in a hamburger menu?
+        // or in general a preferences type dropdown. 
+        // TODO: introduce a popup modal service for it. Have it be task based so the user can't make change to runtime during editing
 
         public ApplicationViewModel(NavigationStore navigationStore)
         {
