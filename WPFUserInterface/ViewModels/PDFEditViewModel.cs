@@ -58,8 +58,11 @@ namespace WPFUserInterface.ViewModels
                     TransferPages(doc.PdfDocument, saveToDoc);
                 }
 
-                // this should take a name field somewhere?
-                saveToDoc.Save($"{MergedFileName}.pdf");
+                // this could be done inline but saving to this lets it be edited later?
+                MergedFileName = Path.GetFileName(Pdfs[0].FileName);
+
+                // this should take a custom name field somewhere?
+                saveToDoc.Save(Path.Combine(DefaultOutputPath, $"{MergedFileName}-merged.pdf"));
                 //Process.Start(saveToDoc.FullPath);
             }
         }
@@ -121,7 +124,6 @@ namespace WPFUserInterface.ViewModels
                 to.AddPage(page);
             }
         }
-
 
         public ObservableCollection<PdfDocumentModel> Pdfs
         {
