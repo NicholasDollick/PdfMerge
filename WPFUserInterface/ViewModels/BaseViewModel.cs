@@ -13,7 +13,6 @@ namespace WPFUserInterface.ViewModels
         // Global Vars
         public string SettingsJsonLocation { get; set; }
         public string MergedFileName { get; set; } = "Temp default value";
-        public Logger Logger { get; set; }
         public string DefaultOutputPath { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Aerialist");
 
         protected void OnPropertyChanged(string propertyName = null)

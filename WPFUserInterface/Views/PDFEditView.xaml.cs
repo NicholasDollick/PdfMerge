@@ -39,7 +39,7 @@ namespace WPFUserInterface.Views
             }
             catch (Exception ex)
             {
-                ((PDFEditViewModel)this.DataContext).CachedLogger.Warning("user attempted to load a file that was not a pdf.");
+                ((PDFEditViewModel)this.DataContext).Logger.Warning("user attempted to load a file that was not a pdf.");
             }
 
 
@@ -53,7 +53,7 @@ namespace WPFUserInterface.Views
                 }
                 catch (Exception ex)
                 {
-                    ((PDFEditViewModel)this.DataContext).CachedLogger.Warning($"unable to update file position in list. || {ex.Message}");
+                    ((PDFEditViewModel)this.DataContext).Logger.Warning($"unable to update file position in list. || {ex.Message}");
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace WPFUserInterface.Views
                 }
                 catch (Exception ex)
                 {
-                    ((PDFEditViewModel)this.DataContext).CachedLogger.Error($"{ex.Message} || {ex.StackTrace}");
+                    ((PDFEditViewModel)this.DataContext).Logger.Error($"{ex.Message} || {ex.StackTrace}");
                 }
             }
         }

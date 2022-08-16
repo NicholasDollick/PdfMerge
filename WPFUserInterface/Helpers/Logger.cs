@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace WPFUserInterface.Helpers
 {
@@ -6,21 +7,22 @@ namespace WPFUserInterface.Helpers
     {
         public string LogFile { get; set; }
 
-        public Logger(string logFile)
+        public Logger(string logFIle)
         {
-            LogFile = logFile;
+            LogFile = logFIle;
+            File.Create(LogFile);
         }
 
 
         // these should check if the output path is null...it really should never be...but end users are silly 
         internal void Error(string message)
         {
-            Console.WriteLine($"[{DateTime.Now}][ERROR]: {message}");
+            File.AppendAllText(LogFile, $"[{DateTime.Now}][ERROR]: {message}\n");
         }
 
         internal void Warning(string message)
         {
-            Console.WriteLine($"[{DateTime.Now}][WARN]: {message}");
+            File.AppendAllText(LogFile, $"[{DateTime.Now}][WARN]: {message}");
         }
     }
 }

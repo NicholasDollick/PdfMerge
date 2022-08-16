@@ -7,7 +7,7 @@ namespace WPFUserInterface.ViewModels
     {
         private readonly NavigationStore _navStore;
 
-        public BaseViewModel CurrentViewModel {get;}
+        public BaseViewModel CurrentViewModel { get; }
 
         // settings for the app should live in a hamburger menu?
         // or in general a preferences type dropdown. 
@@ -18,11 +18,10 @@ namespace WPFUserInterface.ViewModels
             if(!Directory.Exists(DefaultOutputPath))
             {
                 Directory.CreateDirectory(DefaultOutputPath);
-                File.Create(Path.Combine(DefaultOutputPath, "LoggedOutput.txt"));
             }
 
-            Logger = new Logger(Path.Combine(DefaultOutputPath, "LoggedOutput.txt"));
-            CurrentViewModel = new PDFEditViewModel(Logger);
+            Logger logger = new Logger(Path.Combine(DefaultOutputPath, "LoggedOutput.txt"));
+            CurrentViewModel = new PDFEditViewModel(logger);
             //_navStore = navigationStore;
         }
     }

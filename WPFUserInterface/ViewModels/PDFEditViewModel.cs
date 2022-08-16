@@ -4,6 +4,7 @@ using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Windows.Input;
 using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
@@ -21,15 +22,15 @@ namespace WPFUserInterface.ViewModels
         public string DisplayFilePreviewArea { get; set; } = "Hidden";
         public string DisplayImportButtonControls { get; set; } = "Visible";
 
-        public Logger CachedLogger { get; set; }
+        public Logger Logger { get; set; }
 
-        public PDFEditViewModel()
+        public PDFEditViewModel(Logger logger)
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             MergeAndSaveCommand = new RelayCommand(MergePDFs, param => true);
             ClearListCommand = new RelayCommand(ClearList, param => true);
 
-
+            Logger = logger;
             Pdfs = new ObservableCollection<PdfDocumentModel>();
         }
 
@@ -83,6 +84,7 @@ namespace WPFUserInterface.ViewModels
 
         internal void AddPdfsToCollection(string[] files)
         {
+            // this block suuuuuuuuuuucks
             DisplayImportButtonControls = "Collapsed";
             OnPropertyChanged("DisplayImportButtonControls");
             DisplayFilePreviewArea = "Visible";
@@ -90,7 +92,6 @@ namespace WPFUserInterface.ViewModels
 
             foreach (string filename in files)
             {
-                // its possible for this section to...crash?
                 try
                 {
                     using (PdfDocument file = PdfReader.Open(filename, PdfDocumentOpenMode.Import))
@@ -101,8 +102,7 @@ namespace WPFUserInterface.ViewModels
                 catch (Exception e)
                 {
                     // this should much better error handling
-                    //System.Windows.MessageBox.Show(e.Message);
-                    Logger.Error(e.Message);
+                    Logger.Error($"Error parsing {Path.GetFileName(filename)}: {e.Message}");
                 }
             }
         }
