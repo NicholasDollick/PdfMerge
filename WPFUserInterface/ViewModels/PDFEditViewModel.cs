@@ -17,45 +17,18 @@ namespace WPFUserInterface.ViewModels
         public ICommand ClearListCommand { get; set; }
 
         public ObservableCollection<PdfDocumentModel> _pdfs;
-        private bool areButtonsEnabled = true;
-        
-        public string MergedFileName { get; set; } = "Temp default value";
 
         public string DisplayFilePreviewArea { get; set; } = "Hidden";
         public string DisplayImportButtonControls { get; set; } = "Visible";
+        public Logger Logger { get; set; }
 
-        //public bool DisplayFilePreviewArea
-        //{
-        //    get
-        //    {
-        //        return !areButtonsEnabled;
-        //    }
-        //    set
-        //    {
-        //        areButtonsEnabled = value;
-        //        OnPropertyChanged("DisplayFilePreviewArea");
-        //    }
-
-        //}
-
-        //public bool DisplayImportButtonControls
-        //{
-        //    get
-        //    {
-        //        return areButtonsEnabled;
-        //    }
-        //    set
-        //    {
-        //        areButtonsEnabled = !value;
-        //        OnPropertyChanged("DisplayImportButtonControls");
-        //    }
-        //}
-
-        public PDFEditViewModel()
+        public PDFEditViewModel(Logger logger)
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             MergeAndSaveCommand = new RelayCommand(MergePDFs, param => true);
             ClearListCommand = new RelayCommand(ClearList, param => true);
+
+            Logger = logger;
 
             Pdfs = new ObservableCollection<PdfDocumentModel>();
         }
@@ -129,7 +102,7 @@ namespace WPFUserInterface.ViewModels
                 {
                     // this should much better error handling
                     //System.Windows.MessageBox.Show(e.Message);
-                    Console.WriteLine(e.Message);
+                    Logger.Error(e.Message);
                 }
             }
         }

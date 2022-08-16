@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
 using WPFUserInterface.ViewModels;
 
@@ -12,10 +13,11 @@ namespace WPFUserInterface.Views
     /// </summary>
     public partial class PDFEditView : UserControl
     {
-
+        Logger Logger { get; set; }
         public PDFEditView()
         {
             InitializeComponent();
+            Logger = ((PDFEditViewModel)this.DataContext).Logger;
         }
 
         private void StackPanel_Drop(object sender, DragEventArgs e)
@@ -30,7 +32,6 @@ namespace WPFUserInterface.Views
 
         private void ListBox_Drop(object sender, DragEventArgs e)
         {
-            // this style of handing may not be the best.
             // my thoughts here are being able to wrap each section in 
             PdfDocumentModel droppedData = null;
             try
@@ -39,16 +40,22 @@ namespace WPFUserInterface.Views
             }
             catch (Exception ex)
             {
-                // this should go to the logger
-                Console.WriteLine();
+                Logger.Warning("user attempted to load a file that was not a pdf.");
             }
 
-            var target = (sender as StackPanel).DataContext;
-            int targetIndex = PdfListBox.Items.IndexOf(target);
 
             if (droppedData != null)
             {
-                ((PDFEditViewModel)this.DataContext).UpdatePDFListOrder(droppedData, targetIndex);
+                try
+                {
+                    var target = (sender as StackPanel).DataContext;
+                    int targetIndex = PdfListBox.Items.IndexOf(target);
+                    ((PDFEditViewModel)this.DataContext).UpdatePDFListOrder(droppedData, targetIndex);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warning($"unable to update file position in list. || {ex.Message}");
+                }
             }
         }
 
@@ -62,7 +69,7 @@ namespace WPFUserInterface.Views
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message} || {ex.StackTrace}");
+                    Logger.Error($"{ex.Message} || {ex.StackTrace}");
                 }
             }
         }

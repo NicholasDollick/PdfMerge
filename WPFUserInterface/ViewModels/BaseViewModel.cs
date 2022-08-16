@@ -7,7 +7,12 @@ namespace WPFUserInterface.ViewModels
     public class BaseViewModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        // Global Vars
         public string SettingsJsonLocation { get; set; }
+        public string MergedFileName { get; set; } = "Temp default value";
+
+
         protected void OnPropertyChanged(string propertyName = null)
         {
             PropertyChangedEventHandler handler = this.PropertyChanged;

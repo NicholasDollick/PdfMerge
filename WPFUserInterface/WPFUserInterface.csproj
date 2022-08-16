@@ -79,6 +79,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\CommandBase.cs" />
     <Compile Include="Helpers\InvertBooleanConverter.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\NavigationCommand.cs" />
     <Compile Include="Helpers\NavigationStore.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
