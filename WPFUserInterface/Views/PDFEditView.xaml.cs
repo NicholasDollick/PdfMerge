@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
 using WPFUserInterface.ViewModels;
 
@@ -16,7 +15,6 @@ namespace WPFUserInterface.Views
         public PDFEditView()
         {
             InitializeComponent();
-           
         }
 
         private void StackPanel_Drop(object sender, DragEventArgs e)

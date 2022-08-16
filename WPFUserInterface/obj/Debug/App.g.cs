@@ -52,7 +52,7 @@ namespace WPFUserInterface {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPFUserInterface;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aerialist;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

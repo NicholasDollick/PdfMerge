@@ -7,7 +7,7 @@
     <ProjectGuid>{439CC305-652A-4B05-9EA5-7F8B3644AB1E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WPFUserInterface</RootNamespace>
-    <AssemblyName>WPFUserInterface</AssemblyName>
+    <AssemblyName>Aerialist</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,7 +49,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\1178215.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
@@ -156,6 +162,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Images\1178215.png" />
+    <Resource Include="1178215.ico" />
+    <Resource Include="Images\1178215.ico" />
     <Content Include="Images\3223254.svg" />
     <Resource Include="Images\WPFUserInterface_ovzz1uV4Tm.png" />
     <Resource Include="Images\forgot-password.png" />
