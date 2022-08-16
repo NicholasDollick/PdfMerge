@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using WPFUserInterface.Helpers;
 
 namespace WPFUserInterface.ViewModels
 {
@@ -11,7 +13,8 @@ namespace WPFUserInterface.ViewModels
         // Global Vars
         public string SettingsJsonLocation { get; set; }
         public string MergedFileName { get; set; } = "Temp default value";
-
+        public Logger Logger { get; set; }
+        public string DefaultOutputPath { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Aerialist");
 
         protected void OnPropertyChanged(string propertyName = null)
         {

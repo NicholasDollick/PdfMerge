@@ -1,4 +1,5 @@
-﻿using WPFUserInterface.Helpers;
+﻿using System.IO;
+using WPFUserInterface.Helpers;
 
 namespace WPFUserInterface.ViewModels
 {
@@ -14,8 +15,14 @@ namespace WPFUserInterface.ViewModels
 
         public ApplicationViewModel(NavigationStore navigationStore)
         {
-            Logger logger = new Logger();
-            CurrentViewModel = new PDFEditViewModel(logger);
+            if(!Directory.Exists(DefaultOutputPath))
+            {
+                Directory.CreateDirectory(DefaultOutputPath);
+                File.Create(Path.Combine(DefaultOutputPath, "LoggedOutput.txt"));
+            }
+
+            Logger = new Logger(Path.Combine(DefaultOutputPath, "LoggedOutput.txt"));
+            CurrentViewModel = new PDFEditViewModel(Logger);
             //_navStore = navigationStore;
         }
     }

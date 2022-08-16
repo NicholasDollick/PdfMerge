@@ -4,12 +4,15 @@ namespace WPFUserInterface.Helpers
 {
     public class Logger
     {
-        public Logger()
+        public string LogFile { get; set; }
+
+        public Logger(string logFile)
         {
-            // this would open the file to append to
+            LogFile = logFile;
         }
 
 
+        // these should check if the output path is null...it really should never be...but end users are silly 
         internal void Error(string message)
         {
             Console.WriteLine($"[{DateTime.Now}][ERROR]: {message}");

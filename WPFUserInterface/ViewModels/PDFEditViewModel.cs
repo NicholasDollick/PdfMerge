@@ -20,15 +20,15 @@ namespace WPFUserInterface.ViewModels
 
         public string DisplayFilePreviewArea { get; set; } = "Hidden";
         public string DisplayImportButtonControls { get; set; } = "Visible";
-        public Logger Logger { get; set; }
 
-        public PDFEditViewModel(Logger logger)
+        public Logger CachedLogger { get; set; }
+
+        public PDFEditViewModel()
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             MergeAndSaveCommand = new RelayCommand(MergePDFs, param => true);
             ClearListCommand = new RelayCommand(ClearList, param => true);
 
-            Logger = logger;
 
             Pdfs = new ObservableCollection<PdfDocumentModel>();
         }
