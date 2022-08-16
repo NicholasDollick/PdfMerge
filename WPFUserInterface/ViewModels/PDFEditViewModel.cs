@@ -17,8 +17,39 @@ namespace WPFUserInterface.ViewModels
         public ICommand ClearListCommand { get; set; }
 
         public ObservableCollection<PdfDocumentModel> _pdfs;
+        private bool areButtonsEnabled = true;
         
         public string MergedFileName { get; set; } = "Temp default value";
+
+        public string DisplayFilePreviewArea { get; set; } = "Hidden";
+        public string DisplayImportButtonControls { get; set; } = "Visible";
+
+        //public bool DisplayFilePreviewArea
+        //{
+        //    get
+        //    {
+        //        return !areButtonsEnabled;
+        //    }
+        //    set
+        //    {
+        //        areButtonsEnabled = value;
+        //        OnPropertyChanged("DisplayFilePreviewArea");
+        //    }
+
+        //}
+
+        //public bool DisplayImportButtonControls
+        //{
+        //    get
+        //    {
+        //        return areButtonsEnabled;
+        //    }
+        //    set
+        //    {
+        //        areButtonsEnabled = !value;
+        //        OnPropertyChanged("DisplayImportButtonControls");
+        //    }
+        //}
 
         public PDFEditViewModel()
         {
@@ -32,6 +63,12 @@ namespace WPFUserInterface.ViewModels
         private void ClearList(object obj)
         {
             Pdfs.Clear();
+
+            // this entire paradigm is super hacky
+            DisplayImportButtonControls = "Visible";
+            OnPropertyChanged("DisplayImportButtonControls");
+            DisplayFilePreviewArea = "Hidden";
+            OnPropertyChanged("DisplayFilePreviewArea");
         }
 
         private void MergePDFs(object obj)
@@ -73,6 +110,11 @@ namespace WPFUserInterface.ViewModels
 
         internal void AddPdfsToCollection(string[] files)
         {
+            DisplayImportButtonControls = "Collapsed";
+            OnPropertyChanged("DisplayImportButtonControls");
+            DisplayFilePreviewArea = "Visible";
+            OnPropertyChanged("DisplayFilePreviewArea");
+
             foreach (string filename in files)
             {
                 // its possible for this section to...crash?
@@ -101,7 +143,7 @@ namespace WPFUserInterface.ViewModels
         // these are bad var names
         void TransferPages(PdfDocument from, PdfDocument to)
         {
-            foreach(PdfPage page in from.Pages)
+            foreach (PdfPage page in from.Pages)
             {
                 to.AddPage(page);
             }

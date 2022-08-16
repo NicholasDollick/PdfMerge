@@ -30,12 +30,26 @@ namespace WPFUserInterface.Views
 
         private void ListBox_Drop(object sender, DragEventArgs e)
         {
-            PdfDocumentModel droppedData = (e.Data.GetData(typeof(StackPanel)) as StackPanel).DataContext as PdfDocumentModel;
+            // this style of handing may not be the best.
+            // my thoughts here are being able to wrap each section in 
+            PdfDocumentModel droppedData = null;
+            try
+            {
+                droppedData = (e.Data.GetData(typeof(StackPanel)) as StackPanel).DataContext as PdfDocumentModel;
+            }
+            catch (Exception ex)
+            {
+                // this should go to the logger
+                Console.WriteLine();
+            }
 
             var target = (sender as StackPanel).DataContext;
             int targetIndex = PdfListBox.Items.IndexOf(target);
 
-            ((PDFEditViewModel)this.DataContext).UpdatePDFListOrder(droppedData, targetIndex);
+            if (droppedData != null)
+            {
+                ((PDFEditViewModel)this.DataContext).UpdatePDFListOrder(droppedData, targetIndex);
+            }
         }
 
         private void StackPanel_MouseMove(object sender, MouseEventArgs e)

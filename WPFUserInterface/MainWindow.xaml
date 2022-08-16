@@ -45,6 +45,17 @@
                        Padding="10 0 10 0"/>
 
 
+                <!--<StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                    <ToolBar Background="#FF121212" Foreground="Red">
+                        <Menu>
+                            <Button Content="Settings">
+
+                            </Button>
+                        </Menu>
+                    </ToolBar>
+                </StackPanel>-->
+
+
                 <StackPanel Orientation="Horizontal" Grid.Column="12" Grid.ColumnSpan="2">
                     <Button Content="_" Foreground="{StaticResource OnBackgroundColor}" FontSize="11" 
                     FontWeight="Bold"  Click="MinimizeWindow_Click">

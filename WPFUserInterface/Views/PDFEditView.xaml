@@ -49,7 +49,8 @@
                     <!--in theory, this entire section can be bool flag controlled and switch to 
                     display the editing user controls after files are added-->
                     <StackPanel Orientation="Vertical" Background="{StaticResource WidgetColorE}"
-                                Margin="0 20 0 0" AllowDrop="True" Drop="StackPanel_Drop">
+                                Margin="0 20 0 0" AllowDrop="True" Drop="StackPanel_Drop"
+                                Height="250">
                         <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
                                    StrokeDashArray="4 4" SnapsToDevicePixels="True"
                                    Margin="0 5 0 0"/>
@@ -57,7 +58,8 @@
 
 
                         <!--this panel has the button and text-->
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" 
+                                    Visibility="{Binding DisplayImportButtonControls}">
                             <Button Content="SELECT FILES" Foreground="{StaticResource OnPrimaryColor}" FontSize="14" FontWeight="Medium"
                     Margin="0 20 0 0" Command="{Binding OpenFileButtonClick}">
                                 <Button.Style>
@@ -89,6 +91,50 @@
                         </StackPanel>
 
 
+
+                        <!--the field holding the file icons-->
+                        <StackPanel Visibility="{Binding DisplayFilePreviewArea}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <!--PreviewMouseDown="ListBox_PreviewMouseDown"
+                                 Drop="ListBox_Drop"
+                                 GiveFeedback="ListBox_GiveFeedback"-->
+                                <ListBox ItemsSource="{Binding Pdfs}" 
+                                 BorderThickness="0" Background="{StaticResource WidgetColorE}"
+                                 AllowDrop="True"
+                                 Height="160" Width="400"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  x:Name="PdfListBox"
+                                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                 HorizontalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" MouseMove="StackPanel_MouseMove" 
+                                                Drop="ListBox_Drop" Height="80" Width="80">
+                                                <Image Source="{Binding PreviewIcon}" Width="50" Height="50"/>
+                                                <TextBlock Text="{Binding FileName}" FontSize="9"
+                                                   Foreground="White" Width="40"
+                                                   TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <!--this can also be set with a style-->
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <!--<StackPanel Orientation="Horizontal"/>-->
+                                            <WrapPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+
+
                         <Rectangle Stroke="{StaticResource SecondaryColor}" Height="1" StrokeThickness="1"
                                    StrokeDashArray="4 4" SnapsToDevicePixels="True"
                                    Margin="0 0 0 5"/>
@@ -96,7 +142,7 @@
                 </StackPanel>
 
                 <!--where the file preview and stuff will go-->
-                <StackPanel>
+                <!--<StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -104,37 +150,38 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <!--PreviewMouseDown="ListBox_PreviewMouseDown"
+                        --><!--PreviewMouseDown="ListBox_PreviewMouseDown"
                                  Drop="ListBox_Drop"
-                                 GiveFeedback="ListBox_GiveFeedback"-->
+                                 GiveFeedback="ListBox_GiveFeedback"--><!--
                         <ListBox ItemsSource="{Binding Pdfs}" 
                                  BorderThickness="0" Background="{StaticResource WidgetColorC}"
                                  AllowDrop="True"
                                  Height="160" Width="400"
                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                   x:Name="PdfListBox"
-                                 HorizontalAlignment="Center">
+                                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                 HorizontalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical" MouseMove="StackPanel_MouseMove" 
                                                 Drop="ListBox_Drop" Height="80" Width="80">
                                         <Image Source="{Binding PreviewIcon}" Width="50" Height="50"/>
-                                        <TextBlock Text="{Binding FileName}" FontSize="10"
+                                        <TextBlock Text="{Binding FileName}" FontSize="9"
                                                    Foreground="White" Width="40"
                                                    TextWrapping="Wrap"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                            <!--this can also be set with a style-->
+                            --><!--this can also be set with a style--><!--
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <!--<StackPanel Orientation="Horizontal"/>-->
+                                    --><!--<StackPanel Orientation="Horizontal"/>--><!--
                                     <WrapPanel Orientation="Horizontal"/>
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
                     </Grid>
-                </StackPanel>
+                </StackPanel>-->
 
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
