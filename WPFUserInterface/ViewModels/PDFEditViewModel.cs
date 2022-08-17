@@ -69,7 +69,8 @@ namespace WPFUserInterface.ViewModels
 
         private void ImportPDFs(object param)
         {
-            OpenFileDialog ofd = new OpenFileDialog {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
                 InitialDirectory = "",
                 Filter = "Pdf Files|*.pdf",
                 Title = "Select PDFs",

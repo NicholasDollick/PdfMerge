@@ -11,7 +11,7 @@ namespace WPFUserInterface.Views
     /// Interaction logic for LoginView.xaml
     /// </summary>
     public partial class PDFEditView : UserControl
-    { 
+    {
         public PDFEditView()
         {
             InitializeComponent();
@@ -19,7 +19,7 @@ namespace WPFUserInterface.Views
 
         private void StackPanel_Drop(object sender, DragEventArgs e)
         {
-            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
@@ -58,7 +58,7 @@ namespace WPFUserInterface.Views
 
         private void StackPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 try
                 {

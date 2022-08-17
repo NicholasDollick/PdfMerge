@@ -163,7 +163,6 @@
   <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\1178215.png" />
-    <Resource Include="1178215.ico" />
     <Resource Include="Images\1178215.ico" />
     <Content Include="Images\3223254.svg" />
     <Resource Include="Images\WPFUserInterface_ovzz1uV4Tm.png" />

@@ -15,7 +15,7 @@ namespace WPFUserInterface.ViewModels
 
         public ApplicationViewModel(NavigationStore navigationStore)
         {
-            if(!Directory.Exists(DefaultOutputPath))
+            if (!Directory.Exists(DefaultOutputPath))
             {
                 Directory.CreateDirectory(DefaultOutputPath);
                 CreateDefaultSettingsFile();
@@ -30,7 +30,8 @@ namespace WPFUserInterface.ViewModels
         {
             Path.Combine(DefaultOutputPath, "Settings.ini");
             File.Create(Path.Combine(SettingsJsonLocation));
-            object obj = new  {
+            object obj = new
+            {
                 SettingsLocation = SettingsJsonLocation,
                 DefaultSaveLocation = DefaultOutputPath,
                 DefaultFileName = MergedFileName

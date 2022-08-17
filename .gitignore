@@ -6,6 +6,10 @@
 *.user
 *.sln.docstates
 
+WPFUserInterface/obj
+WPFUserInterface/bin
+packages
+
 .vs
 *.vs
 
