@@ -16,11 +16,15 @@ namespace WPFUserInterface.ViewModels
         public ICommand OpenFileButtonClick { get; set; }
         public ICommand MergeAndSaveCommand { get; set; }
         public ICommand ClearListCommand { get; set; }
+        public ICommand OpenSettingsCommand { get; set; }
 
         public ObservableCollection<PdfDocumentModel> _pdfs;
 
         public string DisplayFilePreviewArea { get; set; } = "Hidden";
         public string DisplayImportButtonControls { get; set; } = "Visible";
+
+        // this might be better served in the appviewmodel
+        private PopupWindowFactory PopupWindowFactory { get; set; }
 
         public Logger Logger { get; set; }
 
@@ -29,9 +33,16 @@ namespace WPFUserInterface.ViewModels
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
             MergeAndSaveCommand = new RelayCommand(MergePDFs, param => true);
             ClearListCommand = new RelayCommand(ClearList, param => true);
+            OpenSettingsCommand = new RelayCommand(OpenSettings, param => true);
 
             Logger = logger;
+            PopupWindowFactory = new PopupWindowFactory();
             Pdfs = new ObservableCollection<PdfDocumentModel>();
+        }
+
+        private async void OpenSettings(object obj)
+        {
+            await PopupWindowFactory.CreateNewSettingsPopup();
         }
 
         private void ClearList(object obj)

@@ -28,7 +28,7 @@
                              HorizontalAlignment="Center">
                             <Ellipse.Fill>
                                 <ImageBrush Stretch="UniformToFill"
-                                ImageSource="https://cdn-icons-png.flaticon.com/512/1178/1178215.png"/>
+                                ImageSource="/Images/1178215.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
                         <StackPanel Margin="10 0 0 0"
@@ -75,7 +75,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <!--PreviewMouseDown="ListBox_PreviewMouseDown"
+                                    <!--PrevdiewMouseDown="ListBox_PreviewMouseDown"
                                  Drop="ListBox_Drop"
                                  GiveFeedback="ListBox_GiveFeedback"-->
                                     <ListBox ItemsSource="{Binding Pdfs}" 

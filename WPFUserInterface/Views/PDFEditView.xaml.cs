@@ -31,6 +31,7 @@ namespace WPFUserInterface.Views
         {
             // my thoughts here are being able to wrap each section in 
             PdfDocumentModel droppedData = null;
+
             try
             {
                 droppedData = (e.Data.GetData(typeof(StackPanel)) as StackPanel).DataContext as PdfDocumentModel;
