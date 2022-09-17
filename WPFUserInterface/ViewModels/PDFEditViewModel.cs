@@ -4,8 +4,10 @@ using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Windows.Input;
+using Tesseract;
 using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
 
@@ -28,6 +30,10 @@ namespace WPFUserInterface.ViewModels
 
         public Logger Logger { get; set; }
 
+        // this should later be either a readonly collection or a struct of options?
+        // TODO: support more languages 
+        private const string Language = "eng";
+
         public PDFEditViewModel(Logger logger)
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
@@ -38,6 +44,25 @@ namespace WPFUserInterface.ViewModels
             Logger = logger;
             PopupWindowFactory = new PopupWindowFactory();
             Pdfs = new ObservableCollection<PdfDocumentModel>();
+
+            // DEBUG: test OCR on load
+            var darkModeOcr = GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png"));
+            
+            var darkPic = new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png");
+            // invert the colors of the darkmode image first
+            for (int y = 0; (y <= (darkPic.Height - 1)); y++)
+            {
+                for (int x = 0; (x <= (darkPic.Width - 1)); x++)
+                {
+                    Color inv = darkPic.GetPixel(x, y);
+                    inv = Color.FromArgb(255, (255 - inv.R), (255 - inv.G), (255 - inv.B));
+                    darkPic.SetPixel(x, y, inv);
+                }
+            }
+            var darkModeOcrCorrected = GetTextFromBitmapImage(darkPic);
+            
+            
+            var lightModeOcr = GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\lightmode.png"));
         }
 
         private async void OpenSettings(object obj)
@@ -135,6 +160,30 @@ namespace WPFUserInterface.ViewModels
             {
                 to.AddPage(page);
             }
+        }
+
+        private string GetTextFromBitmapImage(Bitmap imgSource) {
+            string ocrText = string.Empty;
+            
+            // does it make sense to retun nothing if the image is too small to ever even contain text?
+            if (imgSource == null || imgSource.Height == 0 || imgSource.Width == 0)
+            {
+                return ocrText;
+            }
+
+            // im not sure how expensive this process is to run on a thread
+            using (var tessEng = new TesseractEngine(@"./tessdata", Language, EngineMode.Default))
+            {
+                using (var img = PixConverter.ToPix(imgSource))
+                {
+                    using (var page = tessEng.Process(img))
+                    {
+                        ocrText = page.GetText();
+                    }
+                }
+            }
+            
+            return ocrText;
         }
 
         public ObservableCollection<PdfDocumentModel> Pdfs
