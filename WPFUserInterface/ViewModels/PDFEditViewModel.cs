@@ -14,6 +14,7 @@ using Tesseract;
 using WPFUserInterface.Helpers;
 using WPFUserInterface.Models;
 
+
 namespace WPFUserInterface.ViewModels
 {
     public class PDFEditViewModel : BaseViewModel
@@ -32,6 +33,12 @@ namespace WPFUserInterface.ViewModels
         private PopupWindowFactory PopupWindowFactory { get; set; }
 
         public Logger Logger { get; set; }
+
+        private PdfDocumentModel _pdfDocumentModel;
+        public PdfDocumentModel PdfDocumentModel { get { return _pdfDocumentModel; } set { _pdfDocumentModel = value; } }
+
+        private int m_yOffset = 0;
+
 
         // this should later be either a readonly collection or a struct of options?
         // TODO: support more languages 
@@ -54,25 +61,15 @@ namespace WPFUserInterface.ViewModels
             Task.Run(() => { TestOcr(); });
         }
 
+        // TODO: should the image reading utils be in this viewmodel or their own helper?
+        // TODO: should this be a tabbed view? ie: move all the image to pdf logic into its own user control and viewmodel
         private void TestOcr()
         {
             var darkModeOcr = GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png"));
 
-            var darkPic = new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png");
             // invert the colors of the darkmode image first
-            for (int y = 0; (y <= (darkPic.Height - 1)); y++)
-            {
-                for (int x = 0; (x <= (darkPic.Width - 1)); x++)
-                {
-                    // this method of color swapping is suuuuuper expensive
-                    Color inv = darkPic.GetPixel(x, y);
-                    inv = Color.FromArgb(255, (255 - inv.R), (255 - inv.G), (255 - inv.B));
-                    darkPic.SetPixel(x, y, inv);
-                }
-            }
-
-            var darkModeOcrCorrected = GetTextFromBitmapImage(darkPic);
-
+            // TODO: write a way to determine if this function needs to run
+            var darkModeOcrCorrected = GetTextFromBitmapImage(DarkModeImageToLightMode(new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png")));
 
             var lightModeOcr = GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\lightmode.png"));
 
@@ -86,31 +83,70 @@ namespace WPFUserInterface.ViewModels
             using (PdfDocument saveToDoc = new PdfDocument())
             {
                 saveToDoc.Info.Title = "OCR Testing";
-                
+
                 var page = saveToDoc.AddPage();
                 var gfx = XGraphics.FromPdfPage(page);
-                
+
                 // Create a font
                 XFont font = new XFont("Verdana", 12, XFontStyle.Regular);
-                
-                int yOffset = 0;
-                // oh my god I forgot how much I hate pdfs
-                foreach (var ocrText in textToPrintToPDF)
+
+
+                // print out the differences here
+                AddTextToPDF("Dark Mode OCR",
+                    page,
+                    new XFont("Verdana", 16, XFontStyle.Bold),
+                    gfx);
+                foreach (var line in textToPrintToPDF[0].Split('\n'))
                 {
-                    foreach (var line in ocrText.Split('\n'))
+                    // if currently off the page or if printing the current block would create ugly formatting, add a new page
+                    // should this live in the add text function instead?
+                    if (m_yOffset > MaxVerticalPageSize || m_yOffset + 50 > MaxVerticalPageSize)
                     {
-                        // if currently off the page or if printing the current block would create ugly formatting, add a new page
-                        if(yOffset > 750 || yOffset + 50 > 750)
-                        {
-                            // add a new page here
-                            page = saveToDoc.AddPage();
-                            gfx = XGraphics.FromPdfPage(page);
-                            yOffset = 0;
-                        }
-                        gfx.DrawString(line, font, XBrushes.Black, new XRect(XUnit.FromCentimeter(1), yOffset, 10, 40), XStringFormats.CenterLeft);
-                        yOffset += 15;
+                        // add a new page here
+                        page = saveToDoc.AddPage();
+                        gfx = XGraphics.FromPdfPage(page);
+                        m_yOffset = 0;
                     }
-                    yOffset += 30;
+                    AddTextToPDF(line, page, font, gfx);
+                    m_yOffset += 15;
+                }
+
+                AddTextToPDF("Dark Mode Corrected",
+                    page,
+                    new XFont("Verdana", 16, XFontStyle.Bold),
+                    gfx);
+                foreach (var line in textToPrintToPDF[1].Split('\n'))
+                {
+                    // if currently off the page or if printing the current block would create ugly formatting, add a new page
+                    // should this live in the add text function instead?
+                    if (m_yOffset > MaxVerticalPageSize || m_yOffset + 50 > MaxVerticalPageSize)
+                    {
+                        // add a new page here
+                        page = saveToDoc.AddPage();
+                        gfx = XGraphics.FromPdfPage(page);
+                        m_yOffset = 0;
+                    }
+                    AddTextToPDF(line, page, font, gfx);
+                    m_yOffset += 15;
+                }
+
+                AddTextToPDF("Light Mode OCR",
+                    page,
+                    new XFont("Verdana", 16, XFontStyle.Bold),
+                    gfx);
+                foreach (var line in textToPrintToPDF[2].Split('\n'))
+                {
+                    // if currently off the page or if printing the current block would create ugly formatting, add a new page
+                    // should this live in the add text function instead?
+                    if (m_yOffset > MaxVerticalPageSize || m_yOffset + 50 > MaxVerticalPageSize)
+                    {
+                        // add a new page here
+                        page = saveToDoc.AddPage();
+                        gfx = XGraphics.FromPdfPage(page);
+                        m_yOffset = 0;
+                    }
+                    AddTextToPDF(line, page, font, gfx);
+                    m_yOffset += 15;
                 }
 
                 saveToDoc.Save(Path.Combine(DefaultOutputPath, $"ocrTest.pdf"));
@@ -118,9 +154,26 @@ namespace WPFUserInterface.ViewModels
         }
 
         // it may be helpful to move this into a helper class with a bunch of overloads to support text addition
-        private void AddTextToPDF(string text, XFont font)
+        private void AddTextToPDF(string text, PdfPage page, XFont font, XGraphics graphics)
         {
+            graphics.DrawString(text, font, XBrushes.Black, new XRect(XUnit.FromCentimeter(1), m_yOffset, 10, 40), XStringFormats.CenterLeft);
+            m_yOffset += (int)font.Size + 2;
+        }
 
+        private Bitmap DarkModeImageToLightMode(Bitmap image)
+        {
+            for (int y = 0; (y <= (image.Height - 1)); y++)
+            {
+                for (int x = 0; (x <= (image.Width - 1)); x++)
+                {
+                    // this method of color swapping is suuuuuper expensive
+                    Color inv = image.GetPixel(x, y);
+                    inv = Color.FromArgb(255, (255 - inv.R), (255 - inv.G), (255 - inv.B));
+                    image.SetPixel(x, y, inv);
+                }
+            }
+
+            return image;
         }
 
         private async void OpenSettings(object obj)
@@ -220,9 +273,10 @@ namespace WPFUserInterface.ViewModels
             }
         }
 
-        private string GetTextFromBitmapImage(Bitmap imgSource) {
+        private string GetTextFromBitmapImage(Bitmap imgSource)
+        {
             string ocrText = string.Empty;
-            
+
             // does it make sense to retun nothing if the image is too small to ever even contain text?
             if (imgSource == null || imgSource.Height == 0 || imgSource.Width == 0)
             {
@@ -240,7 +294,7 @@ namespace WPFUserInterface.ViewModels
                     }
                 }
             }
-            
+
             return ocrText;
         }
 
