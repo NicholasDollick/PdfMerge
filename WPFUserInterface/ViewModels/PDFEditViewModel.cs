@@ -1,11 +1,14 @@
 ﻿using Microsoft.Win32;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Tesseract;
 using WPFUserInterface.Helpers;
@@ -34,6 +37,8 @@ namespace WPFUserInterface.ViewModels
         // TODO: support more languages 
         private const string Language = "eng";
 
+        private const int MaxVerticalPageSize = 750;
+
         public PDFEditViewModel(Logger logger)
         {
             OpenFileButtonClick = new RelayCommand(ImportPDFs, param => true);
@@ -46,23 +51,76 @@ namespace WPFUserInterface.ViewModels
             Pdfs = new ObservableCollection<PdfDocumentModel>();
 
             // DEBUG: test OCR on load
+            Task.Run(() => { TestOcr(); });
+        }
+
+        private void TestOcr()
+        {
             var darkModeOcr = GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png"));
-            
+
             var darkPic = new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png");
             // invert the colors of the darkmode image first
             for (int y = 0; (y <= (darkPic.Height - 1)); y++)
             {
                 for (int x = 0; (x <= (darkPic.Width - 1)); x++)
                 {
+                    // this method of color swapping is suuuuuper expensive
                     Color inv = darkPic.GetPixel(x, y);
                     inv = Color.FromArgb(255, (255 - inv.R), (255 - inv.G), (255 - inv.B));
                     darkPic.SetPixel(x, y, inv);
                 }
             }
+
             var darkModeOcrCorrected = GetTextFromBitmapImage(darkPic);
-            
-            
+
+
             var lightModeOcr = GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\lightmode.png"));
+
+            List<string> textToPrintToPDF = new List<string>();
+            textToPrintToPDF.Add(darkModeOcr);
+            textToPrintToPDF.Add(darkModeOcrCorrected);
+            textToPrintToPDF.Add(lightModeOcr);
+
+
+            // assemble the pages of the pdfs into one file
+            using (PdfDocument saveToDoc = new PdfDocument())
+            {
+                saveToDoc.Info.Title = "OCR Testing";
+                
+                var page = saveToDoc.AddPage();
+                var gfx = XGraphics.FromPdfPage(page);
+                
+                // Create a font
+                XFont font = new XFont("Verdana", 12, XFontStyle.Regular);
+                
+                int yOffset = 0;
+                // oh my god I forgot how much I hate pdfs
+                foreach (var ocrText in textToPrintToPDF)
+                {
+                    foreach (var line in ocrText.Split('\n'))
+                    {
+                        // if currently off the page or if printing the current block would create ugly formatting, add a new page
+                        if(yOffset > 750 || yOffset + 50 > 750)
+                        {
+                            // add a new page here
+                            page = saveToDoc.AddPage();
+                            gfx = XGraphics.FromPdfPage(page);
+                            yOffset = 0;
+                        }
+                        gfx.DrawString(line, font, XBrushes.Black, new XRect(XUnit.FromCentimeter(1), yOffset, 10, 40), XStringFormats.CenterLeft);
+                        yOffset += 15;
+                    }
+                    yOffset += 30;
+                }
+
+                saveToDoc.Save(Path.Combine(DefaultOutputPath, $"ocrTest.pdf"));
+            }
+        }
+
+        // it may be helpful to move this into a helper class with a bunch of overloads to support text addition
+        private void AddTextToPDF(string text, XFont font)
+        {
+
         }
 
         private async void OpenSettings(object obj)
