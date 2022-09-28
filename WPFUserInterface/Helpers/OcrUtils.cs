@@ -3,7 +3,6 @@ using Tesseract;
 
 namespace WPFUserInterface.Helpers
 {
-    // there is a world where it makes more sense to just have all of these be static methods
     internal class OcrUtils
     {
 
@@ -31,6 +30,11 @@ namespace WPFUserInterface.Helpers
             }
 
             return image;
+        }
+
+        internal bool DetectDarkMode(Bitmap image)
+        {
+            return true;
         }
 
 

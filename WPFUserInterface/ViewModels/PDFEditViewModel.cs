@@ -56,8 +56,8 @@ namespace WPFUserInterface.ViewModels
             Task.Run(() => { TestOcr(); });
         }
 
-        // TODO: should the image reading utils be in this viewmodel or their own helper?
         // TODO: should this be a tabbed view? ie: move all the image to pdf logic into its own user control and viewmodel
+        // TODO: should ALL the ocr logic be in the utils class??
         private void TestOcr()
         {
             var darkModeOcr = OcrUtils.GetTextFromBitmapImage(new Bitmap(@"C:\Users\Nullbytes\Pictures\darkmode.png"));
