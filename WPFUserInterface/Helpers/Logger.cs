@@ -5,11 +5,11 @@ namespace WPFUserInterface.Helpers
 {
     public class Logger
     {
-        public string LogFile { get; set; }
+        private string LogFile { get; set; }
 
-        public Logger(string logFIle)
+        public Logger(string logFile)
         {
-            LogFile = logFIle;
+            LogFile = logFile;
             File.Create(LogFile);
         }
 
@@ -18,6 +18,11 @@ namespace WPFUserInterface.Helpers
         internal void Error(string message)
         {
             File.AppendAllText(LogFile, $"[{DateTime.Now}][ERROR]: {message}\n");
+        }
+
+        internal void Info(string message)
+        {
+            File.AppendAllText(LogFile, $"[{DateTime.Now}][INFO]: {message}\n");
         }
 
         internal void Warning(string message)
